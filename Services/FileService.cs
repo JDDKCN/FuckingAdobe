@@ -35,7 +35,7 @@ namespace AdobeBlockListConverter.Services
 
         public async Task ProcessInputFileAsync(string inputPath, string outputPath, bool isWebSource, string webContent = null)
         {
-            string processedContent = _config.OutputFileHeader;
+            string processedContent = _config.CurrentTemplate.OutputFileHeader;
 
             if (isWebSource && !string.IsNullOrEmpty(webContent))
             {
@@ -47,7 +47,7 @@ namespace AdobeBlockListConverter.Services
                 processedContent += await _dataProcessor.ProcessDataAsync(fileContent);
             }
 
-            processedContent += _config.OutputFileCommand;
+            processedContent += _config.CurrentTemplate.OutputFileCommand;
 
             await WriteToFileAsync(outputPath, processedContent);
         }

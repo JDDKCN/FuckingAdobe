@@ -24,7 +24,7 @@ namespace AdobeBlockListConverter
                 Console.ResetColor();
             }
 
-            if (!(args.Length > 2 && args[2] == "-q"))
+            if (!(args.Length > 3 && args[3] == "-q"))
             {
                 Console.WriteLine($"\r\n按任意键退出。");
                 Console.ReadKey();

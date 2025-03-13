@@ -19,6 +19,29 @@ namespace AdobeBlockListConverter.Applications
             {
                 _ui.WelcomeMessage();
 
+                var templates = config.AvailableTemplates;
+
+                Console.WriteLine("可用的模板类型:");
+                foreach (var template in templates.Keys)
+                {
+                    Console.WriteLine($" - {template}");
+                }
+
+                Console.Write("请选择要使用的模板类型: ");
+                string? templateType = config.GetMode(args) ?? Console.ReadLine();
+
+                while (true)
+                {
+                    if (!string.IsNullOrWhiteSpace(templateType) && templates.ContainsKey(templateType.ToLower()))
+                    {
+                        config.SetTemplate(templateType);
+                        break;
+                    }
+
+                    Console.WriteLine($"无效的模板类型，请重新输入：");
+                    templateType = Console.ReadLine();
+                }
+
                 string inputFilePath = _ui.GetInputFilePath(args);
                 string inputContent = null;
                 bool isWebSource = false;
@@ -52,7 +75,7 @@ namespace AdobeBlockListConverter.Applications
                     }
                 }
 
-                string outputFilePath = _ui.GetOutputFilePath(args, _config.OutputFileTemplate);
+                string outputFilePath = _ui.GetOutputFilePath(args, _config.CurrentTemplate.OutputFileNameTemplate);
                 await _fileService.ProcessInputFileAsync(inputFilePath, outputFilePath, isWebSource, inputContent);
 
                 _ui.DisplaySuccess("\r\n处理完成！");

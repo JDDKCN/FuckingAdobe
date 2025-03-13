@@ -20,7 +20,7 @@ namespace AdobeBlockListConverter.Services
             if (match.Success)
                 domain = match.Groups[1].Value.Trim();
 
-            return string.Format(_config.OutputLineTemplate, domain);
+            return string.Format(_config.CurrentTemplate.OutputLineTemplate, domain);
         }
 
         public async Task<string> ProcessDataAsync(string inputData)

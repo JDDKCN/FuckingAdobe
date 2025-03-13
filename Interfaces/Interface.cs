@@ -34,14 +34,4 @@
         string GetInputFilePath(string[] args);
         string GetOutputFilePath(string[] args, string defaultPath);
     }
-
-    public interface IAppConfig
-    {
-        string GetBlockListUrl { get; }
-        string OutputFileTemplate { get; }
-        string OutputLineTemplate { get; }
-        string OutputFileHeader { get; }
-        string OutputFileCommand { get; }
-    }
-
 }
