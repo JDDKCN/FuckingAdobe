@@ -32,6 +32,17 @@
 1. `cfw` - 适用于 Clash For Windows 的配置模板
 2. `verge` - 适用于 Clash Verge 的配置模板
 
+### 适用于 Clash Verge 的 JavaScript 模板
+
+```json
+  "verge-js": {
+    "outputFileHeader": "// By KCN-Server.AdobeBlockListConverter\nfunction main(config) {\n    if (!config['proxy-groups']) config['proxy-groups'] = [];\n    if (!config['rules']) config['rules'] = [];\n    config['proxy-groups'].unshift({\n        name: 'Fucking-Adobe',\n        type: 'select',\n        proxies: ['REJECT']\n    });\n    const adobeRules = [\n",
+    "outputLineTemplate": "        \"DOMAIN-SUFFIX,{0},Fucking-Adobe\",",
+    "outputFileCommand": "    ];\n    config['rules'] = adobeRules.concat(config['rules']);\n    return config;\n}",
+    "outputFileNameTemplate": "KCNServer-AdobeBlockList-JS-{0}.js"
+  }
+```
+
 ### 如何添加新模板
 
 1. 打开 `config.json` 文件
